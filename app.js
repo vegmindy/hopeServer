@@ -1,19 +1,15 @@
 require('dotenv').config();
-
 const express = require('express');
 const db = require('./db');
-
 const app = express();
-
 const controllers = require('./controllers')
 
+app.use(express.json());
 app.use(require('./middleware/headers'));
 
-app.use(express.json());
 
-app.use('./controllers/index');
 app.use('/user', controllers.userController)
-app.use('/games', controllers.reviewController)
+app.use('/review', controllers.reviewController)
 
 
 db.authenticate()
