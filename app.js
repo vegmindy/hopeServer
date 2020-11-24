@@ -11,7 +11,6 @@ app.use(require('./middleware/headers'));
 
 app.use(express.json());
 
-app.use('./controllers/index');
 app.use('/user', controllers.userController)
 app.use('/games', controllers.reviewController)
 
