@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const {User} = require('../models');
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -17,7 +16,7 @@ router.post('/register', async (req, res) => {
             lastName,
             email,
             password: bcrypt.hashSync(password, 13),
-            preferences
+            preferences: ( preferences ) ? preferences : "None"
         })
         res.status(201).json({
             message: "User Registered!",
@@ -38,6 +37,7 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
+    console.log(1)
     let {email, password} = req.body;
     try {
         let loginUser = await User.findOne({
@@ -60,6 +60,12 @@ router.post('/login', async (req, res) => {
             error: "Error logging in"
         })
     }
-})
+});
+
+router.get('/getUser', (req, res) => {
+    User.findOne({where:{id:req.body.id}})
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(500).json(err))
+}) 
 
 module.exports = router;
