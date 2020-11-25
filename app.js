@@ -1,15 +1,18 @@
 require('dotenv').config();
+const bodyParser = require('body-parser')
 const express = require('express');
 const db = require('./db');
 const app = express();
-const controllers = require('./controllers')
+const controllers = require('./controllers');
+const validateSession = require('./middleware/validateSession');
 
 app.use(express.json());
 app.use(require('./middleware/headers'));
+app.use(bodyParser.json())
 
 
 app.use('/user', controllers.userController)
-app.use('/review', controllers.reviewController)
+app.use('/review', validateSession, controllers.reviewController)
 
 
 db.authenticate()
