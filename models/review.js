@@ -19,14 +19,13 @@ const Review = db.define("review", {
         allowNull: false
     },
     owner_ID:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     totalUserRating:{
         type: DataTypes.INTEGER,
         allowNull: true
     }
-
 })
 
 module.exports = Review;

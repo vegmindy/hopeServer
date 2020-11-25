@@ -10,7 +10,7 @@ const User = db.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     }, 
-    type: {
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -19,6 +19,7 @@ const User = db.define('user', {
         type: DataTypes.STRING, 
         allowNull: false
     }
+    
 })
 
 module.exports = User;
