@@ -24,7 +24,7 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/addreview", async (req, res) => {
-    const {gameTitle, userReview, userRating, userName, owner_ID} = req.body;//totalUserRating
+    const {gameTitle, userReview, userRating, userName} = req.body;//totalUserRating
 
     try{
 
@@ -33,7 +33,7 @@ router.post("/addreview", async (req, res) => {
             userReview,
             userRating,
             userName,
-            owner_ID
+            owner_ID: req.user.id
         });
         
         res.status(200).json({
@@ -45,6 +45,22 @@ router.post("/addreview", async (req, res) => {
         res.status(500).json({message:"Server Error"})
     }
 })
+
+router.put('/updatereview:id', (req, res) => {
+    const query = req.params.id;
+    Review.update(req.body, {where: {id: query}})
+    .then(reviewUpdated => {
+        Review.findOne({where: {id: query}})
+        .then(locatedUpdatedReview => {
+            res.status(200).json({
+                review: locatedUpdatedReview,
+                message: 'Review has been updated',
+                reviewChanged: reviewUpdated
+            })
+        })
+    })
+})
+
 
 
 
