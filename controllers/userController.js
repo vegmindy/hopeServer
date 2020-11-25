@@ -18,9 +18,11 @@ router.post('/register', async (req, res) => {
             password: bcrypt.hashSync(password, 13),
             preferences: ( preferences ) ? preferences : "None"
         })
+        const token = jwt.sign({id: newUser.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24})
         res.status(201).json({
             message: "User Registered!",
-            user: newUser
+            user: newUser,
+            token: token
         })
     } catch (error) {
         if (error instanceof UniqueConstraintError) {
