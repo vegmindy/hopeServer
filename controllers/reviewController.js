@@ -11,6 +11,7 @@ router.get("/byuser", (req, res) => {
 })
 
 
+
 router.get("/all", (req, res) =>{
     Review.findAll()
     .then(data => res.status(200).json(data))
