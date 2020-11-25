@@ -8,9 +8,6 @@ app.use(express.json());
 app.use(require('./middleware/headers'));
 
 
-
-
-
 app.use('/user', controllers.userController)
 app.use('/review', controllers.reviewController)
 
