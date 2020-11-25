@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const{Review} = require('../models/index');
 const validateSession = require('../middleware/validateSession');
+const { findOne } = require('../models/user');
 
 router.get("/byuser", (req, res) => {
     let ownerid = req.body.owner_ID
@@ -19,7 +20,6 @@ router.get("/:id", (req, res) => {
 router.post("/addreview", async (req, res) => {
     const {gameTitle, userReview, userRating, userName, owner_ID} = req.body;//totalUserRating
 
-    console.log(avgRating)
     try{
 
         let newReview = Review.create({
@@ -38,9 +38,31 @@ router.post("/addreview", async (req, res) => {
     catch{
         res.status(500).json({message:"Server Error"})
     }
+});
+
+//* DELETE REVIEW
+
+router.delete('/:id', (req, res) => {
+    Review.destroy({
+        where: { id: req.params.id}
+    })
+    .then(log => res.status(200).json(log))
+    .catch(err => res.json({error: err}))
 })
 
 
+// router.delete('/deleteReview', (req, res) => {
+//     let content=findOne({where: {id: req.body.id}})
+    // let query = {
+    //     where: {
+    //         review: deleteReview,
+    //         message: "Review successfully deleted"
+    //     }
+    // }
 
+//     Review.destroy(content)
+//       .then(() => res.status(200).json({ message: "Journal Entry Removed" }))
+//       .catch((err) => res.status(500).json({ error:err }));
+// });
 
 module.exports = router;
