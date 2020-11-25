@@ -10,16 +10,21 @@ router.get("/byuser", (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
+
+router.get("/all", (req, res) =>{
+    Review.findAll()
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(500).json(err))
+})
+
 router.get("/:id", (req, res) => {
-    Review.findOne({Where:{id: req.params.id}})
+    Review.findOne({where:{id: req.params.id}})
     .then(review => res.status(200).json(review))
     .catch(err => res.status(500).json(err))
 })
 
 router.post("/addreview", async (req, res) => {
     const {gameTitle, userReview, userRating, userName, owner_ID} = req.body;//totalUserRating
-
-    
 
     try{
 
