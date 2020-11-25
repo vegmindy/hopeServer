@@ -19,7 +19,7 @@ const Review = db.define("review", {
         allowNull: false
     },
     owner_ID:{
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     totalUserRating:{

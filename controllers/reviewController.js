@@ -19,10 +19,11 @@ router.get("/:id", (req, res) => {
 router.post("/addreview", async (req, res) => {
     const {gameTitle, userReview, userRating, userName, owner_ID} = req.body;//totalUserRating
 
-    console.log(avgRating)
+    
+
     try{
 
-        let newReview = Review.create({
+        let newReview = await Review.create({
             gameTitle,
             userReview,
             userRating,
