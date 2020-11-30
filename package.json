@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "12.19.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "react-scripts start",
-    "start": "server -s build",
-    "build": "react-scripts build",
-    "heroku-postbuild": "npm run build"
+    "dev": "nodmeon",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
