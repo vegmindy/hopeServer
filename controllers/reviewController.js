@@ -42,8 +42,8 @@ router.post("/addreview", async (req, res) => {
             message: "Review submitted"
         })
     }
-    catch{
-        res.status(500).json({message:"Server Error"})
+    catch(error) {
+        res.status(500).json({message:"Server Error" + error})
     }
 });
 
