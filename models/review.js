@@ -2,8 +2,8 @@ const {DataTypes} = require("sequelize");
 const db = require("../db");
 
 const Review = db.define("review", {
-    gameTitle:{
-        type: DataTypes.STRING,
+    gameId:{
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     userReview:{
@@ -14,20 +14,10 @@ const Review = db.define("review", {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    userName:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     owner_ID:{
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    totalUserRating:{
-        type: DataTypes.INTEGER,
-        allowNull: true
     }
 })
 
 module.exports = Review;
-
-//Review, OwnerID, UserRating, Overall Rating
