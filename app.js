@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 
 
 app.use('/user', controllers.userController)
-app.use('/review', validateSession, controllers.reviewController)
+app.use('/review', controllers.reviewController)
 
 
 db.authenticate()
