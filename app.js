@@ -11,8 +11,9 @@ app.use(require('./middleware/headers'));
 app.use(bodyParser.json())
 
 
-app.use('/user', controllers.userController)
-app.use('/review', controllers.reviewController)
+app.use('/user', controllers.userController);
+app.use('/review', validateSession, controllers.reviewController); //add validatesession back in
+app.use('/search', controllers.searchController);
 
 
 db.authenticate()

@@ -11,6 +11,15 @@ router.get("/byuser", validateSession, (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
+router.get("/bygame", (req, res) => {
+    let gameId = req.body.gameId
+    Review.findAll({where: {gameId: gameId}})
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({error: err}))
+})
+
 
 
 router.get("/all", (req, res) =>{
@@ -25,16 +34,16 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
+
 router.post("/addreview", validateSession, async (req, res) => {
     const {gameTitle, userReview, userRating, userName} = req.body;//totalUserRating
 
     try{
 
         let newReview = await Review.create({
-            gameTitle,
+            gameId,
             userReview,
             userRating,
-            userName,
             owner_ID: req.user.id
         });
         
@@ -43,8 +52,8 @@ router.post("/addreview", validateSession, async (req, res) => {
             message: "Review submitted"
         })
     }
-    catch{
-        res.status(500).json({message:"Server Error"})
+    catch(error) {
+        res.status(500).json({message:"Server Error" + error})
     }
 });
 
