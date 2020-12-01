@@ -11,6 +11,15 @@ router.get("/byuser", (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
+router.get("/bygame", (req, res) => {
+    let gameId = req.body.gameId
+    Review.findAll({where: {gameId: gameId}})
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({error: err}))
+})
+
 
 router.get("/all", (req, res) =>{
     Review.findAll()
@@ -25,15 +34,14 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/addreview", async (req, res) => {
-    const {gameTitle, userReview, userRating, userName} = req.body;//totalUserRating
+    const { gameId, userReview, userRating } = req.body; //totalUserRating
 
     try{
 
         let newReview = await Review.create({
-            gameTitle,
+            gameId,
             userReview,
             userRating,
-            userName,
             owner_ID: req.user.id
         });
         
