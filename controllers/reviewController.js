@@ -36,12 +36,7 @@ router.get("/:id", (req, res) => {
 
 
 router.post("/addreview", validateSession, async (req, res) => {
-<<<<<<< HEAD
     const {gameTitle, userReview, userRating} = req.body;
-=======
-    const { userReview, userRating, gameId } = req.body;
->>>>>>> 833eabfddeaba906c87cd7f9d6cbb493fab336f3
-
     try{
 
         let newReview = await Review.create({
