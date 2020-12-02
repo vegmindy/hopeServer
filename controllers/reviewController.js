@@ -20,8 +20,6 @@ router.get("/bygame", (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
-
-
 router.get("/all", (req, res) =>{
     Review.findAll()
     .then(data => res.status(200).json(data))
@@ -36,12 +34,12 @@ router.get("/:id", (req, res) => {
 
 
 router.post("/addreview", validateSession, async (req, res) => {
-    const { userReview, userRating, gameId } = req.body;
+    const { userReview, userRating, gameTitle } = req.body;
 
     try{
 
         let newReview = await Review.create({
-            gameId,
+            gameTitle,
             userReview,
             userRating,
             owner_ID: req.user.id
