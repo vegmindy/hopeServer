@@ -2,8 +2,8 @@ const {DataTypes} = require("sequelize");
 const db = require("../db");
 
 const Review = db.define("review", {
-    gameId:{
-        type: DataTypes.INTEGER,
+    gameTitle:{
+        type: DataTypes.STRING,
         allowNull: false
     },
     userReview:{
