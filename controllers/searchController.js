@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const validateSession = require('../middleware/validateSession');
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 router.get("/", (req, res) => {
     const urlReq = {
