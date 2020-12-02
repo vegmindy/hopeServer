@@ -20,6 +20,8 @@ router.get("/bygame", (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
+console.log(mytest);
+
 
 
 router.get("/all", (req, res) =>{
