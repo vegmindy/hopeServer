@@ -66,7 +66,7 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.json({error: err}))
 })
 
-router.put('/updatereview:id', (req, res) => {
+router.put('/updatereview/:id', (req, res) => {
     const query = req.params.id;
     Review.update(req.body, {where: {id: query}})
     .then(reviewUpdated => {
