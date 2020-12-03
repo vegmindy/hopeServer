@@ -57,13 +57,7 @@ router.post("/addreview", validateSession, async (req, res) => {
 
 //* DELETE REVIEW
 
-router.delete('/:id', (req, res) => {
-    Review.destroy({
-        where: { id: req.params.id}
-    })
-    .then(log => res.status(200).json(log))
-    .catch(err => res.json({error: err}))
-})
+
 
 router.put('/updatereview/:id', (req, res) => {
     console.log(req.body)
@@ -79,6 +73,14 @@ router.put('/updatereview/:id', (req, res) => {
             })
         })
     })
+})
+
+router.delete('/delete/', (req, res) => {
+    Review.destroy({
+        where: { id: req.body.id}
+    })
+    .then(log => res.status(200).json(log))
+    .catch(err => res.json({error: err}))
 })
 
 module.exports = router;
