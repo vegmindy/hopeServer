@@ -11,14 +11,14 @@ router.get("/byuser", validateSession, (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
-router.get("/bygame", (req, res) => {
-    let gameId = req.body.gameId
-    Review.findAll({where: {gameId: gameId}})
-    .then(data => {
-        res.status(200).json(data)
-    })
-    .catch(err => res.status(500).json({error: err}))
-})
+// router.get("/bygame", (req, res) => {
+//     let gameId = req.body.gameId
+//     Review.findAll({where: {gameId: gameId}})
+//     .then(data => {
+//         res.status(200).json(data)
+//     })
+//     .catch(err => res.status(500).json({error: err}))
+// })
 
 router.get("/all", (req, res) =>{
     Review.findAll()
@@ -26,11 +26,11 @@ router.get("/all", (req, res) =>{
     .catch(err => res.status(500).json(err))
 })
 
-router.get("/:id", (req, res) => {
-    Review.findOne({where:{id: req.params.id}})
-    .then(review => res.status(200).json(review))
-    .catch(err => res.status(500).json(err))
-})
+// router.get("/:id", (req, res) => {
+//     Review.findOne({where:{id: req.params.id}})
+//     .then(review => res.status(200).json(review))
+//     .catch(err => res.status(500).json(err))
+// })
 
 
 router.post("/addreview", validateSession, async (req, res) => {
@@ -57,15 +57,10 @@ router.post("/addreview", validateSession, async (req, res) => {
 
 //* DELETE REVIEW
 
-router.delete('/:id', (req, res) => {
-    Review.destroy({
-        where: { id: req.params.id}
-    })
-    .then(log => res.status(200).json(log))
-    .catch(err => res.json({error: err}))
-})
+
 
 router.put('/updatereview/:id', (req, res) => {
+    console.log(req.body)
     const query = req.params.id;
     Review.update(req.body, {where: {id: query}})
     .then(reviewUpdated => {
@@ -78,6 +73,14 @@ router.put('/updatereview/:id', (req, res) => {
             })
         })
     })
+})
+
+router.delete('/delete/', (req, res) => {
+    Review.destroy({
+        where: { id: req.body.id}
+    })
+    .then(log => res.status(200).json(log))
+    .catch(err => res.json({error: err}))
 })
 
 module.exports = router;
